@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Usuario;
 use Illuminate\Http\Request;
+use App\Http\Resources\Usuario\UsuarioResource as UsuarioResource;
 
 class UsuarioController extends Controller
 {
@@ -52,9 +53,9 @@ class UsuarioController extends Controller
      * @param  \App\Model\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
-    {  
-        return new UsuarioResource($usuario);
+    public function show($id)
+    {   
+        return Usuario::with(['items'])->find($id);
     }
 
     /**

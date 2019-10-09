@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources\Usuario;
 
+use App\Model\Usuario;
+use App\Model\Item;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UsuarioResource extends JsonResource
@@ -14,6 +17,12 @@ class UsuarioResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'name'=>$this->name,
+            'email'=>$this->email,
+            'item'=> function(){
+                return json(Usuario::find($this->id)->Items);
+            },
+        ];
     }
 }

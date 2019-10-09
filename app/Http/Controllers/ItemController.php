@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Item;
+use App\Model\Usuario;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -14,7 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        return Item::all();
     }
 
     /**
@@ -46,7 +47,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        return 'show';
     }
 
     /**

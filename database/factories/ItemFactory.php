@@ -11,7 +11,7 @@ $factory->define(Item::class, function (Faker $faker) {
         'usuario_id'=> function(){
             return Usuario::all()->random();
         },
-        'name'=>$faker->name,
+        'name'=>$faker->streetSuffix,
         'datein'=>now(),
         'dateout'=>$faker->date($format = 'Y-m-d', $max = 'now'),
         'Status'=>$faker->boolean
