@@ -14,7 +14,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        return Usuario::all();
     }
 
     /**
@@ -24,7 +24,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        
         
     }
 
@@ -36,7 +36,14 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=new $usuario();
+        
+        $data->name= $request->input("name");
+        $data->email= $request->input("email");
+        $data->password= $request->input("password");
+        $data->email_verified_at = now();
+        $data->save();
+
     }
 
     /**
@@ -46,8 +53,8 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Usuario $usuario)
-    {
-        //
+    {  
+        return new UsuarioResource($usuario);
     }
 
     /**

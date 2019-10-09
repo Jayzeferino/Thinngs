@@ -10,6 +10,6 @@ $factory->define(Usuario::class, function (Faker $faker) {
         'name'=>$faker->name,
         'email'=>$faker->unique()->freeEmail,
         'email_verified_at' => now(),
-        'password'=>$faker->password
+        'password'=>$faker->password,
     ];
 });

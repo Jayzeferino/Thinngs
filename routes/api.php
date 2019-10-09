@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Usuario;
 use Illuminate\Http\Request;
 
 /*
@@ -17,4 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/','UsuarioController');
+Route::apiResource('/usuarios','UsuarioController');
+Route::group(['prefix'=>'usuarios'], function(){
+    Route::apiResource('/{usuarios}/items','ItemController');
+});
