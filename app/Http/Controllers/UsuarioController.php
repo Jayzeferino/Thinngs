@@ -36,15 +36,13 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $data=new $usuario();
-        
-        $data->name= $request->input("name");
-        $data->email= $request->input("email");
-        $data->password= $request->input("password");
-        $data->email_verified_at = now();
-        $data->save();
-
+    {    
+        $data=[
+        'name'=> $request->input("name"),
+        'email'=> $request->input("email"),
+        'password'=> bcrypt($request->input("password")),
+        'email_verified_at' => now()];
+        Usuario::create($data);
     }
 
     /**
@@ -55,7 +53,7 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {   
-        return Usuario::with(['items'])->find($id);
+        return Usuario::with(['items'])->findOrFail($id);
     }
 
     /**
@@ -76,9 +74,16 @@ class UsuarioController extends Controller
      * @param  \App\Model\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, $id)
     {
         //
+        $data=Usuario::findOrFail($id);
+        $data->name= $request->input("name");
+        $data->email= $request->input("email");
+        $data->password= bcrypt($request->input("password"));
+        $data->email_verified_at = now();
+        $data->save();
+
     }
 
     /**
@@ -87,8 +92,9 @@ class UsuarioController extends Controller
      * @param  \App\Model\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario $usuario)
+    public function destroy($id)
     {
-        //
+        $data=Usuario::findOrFail($id);
+        $data->delete();
     }
 }

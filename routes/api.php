@@ -19,6 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/usuarios','UsuarioController');
-Route::group(['prefix'=>'usuarios'], function(){
-    Route::apiResource('/{usuarios}/items','ItemController');
-});
+Route::apiResource('/items','ItemController');

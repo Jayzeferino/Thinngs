@@ -36,7 +36,14 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data=[ 
+        'name'=>$request->input("name"),
+        'datein'=>$request->input("datein"),
+        'dateout'=>$request->input("dateout"),
+        'status'=>$request->input("status")];
+                
+
     }
 
     /**
@@ -45,9 +52,9 @@ class ItemController extends Controller
      * @param  \App\Model\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show($id)
     {
-        return 'show';
+        return Item::findOrFail($id);
     }
 
     /**
