@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsuarioRequest;
 use App\Model\Usuario;
 use Illuminate\Http\Request;
 use App\Http\Resources\Usuario\UsuarioResource as UsuarioResource;
@@ -35,13 +36,17 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsuarioRequest $request)
     {    
-        $data=[
-        'name'=> $request->input("name"),
-        'email'=> $request->input("email"),
-        'password'=> bcrypt($request->input("password")),
-        'email_verified_at' => now()];
+
+            $data= [
+                'name'=> $request->input("name"),
+                'email'=> $request->input("email"),
+                'password'=> bcrypt($request->input("password")),
+                'email_verified_at' => now()];
+        
+        
+        
         Usuario::create($data);
     }
 
