@@ -42,8 +42,7 @@ class ItemController extends Controller
         'datein'=>$request->input("datein"),
         'dateout'=>$request->input("dateout"),
         'status'=>$request->input("status")];
-                
-
+        Item::create($data);
     }
 
     /**
@@ -86,8 +85,9 @@ class ItemController extends Controller
      * @param  \App\Model\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy($id)
     {
-        //
+        $data=Item::findOrFail($id);
+        $data->delete();
     }
 }
