@@ -38,8 +38,7 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioRequest $request)
     {    
-
-            $data= [
+        $data= [
                 'name'=> $request->input("name"),
                 'email'=> $request->input("email"),
                 'password'=> bcrypt($request->input("password")),

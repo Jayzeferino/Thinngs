@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ItemRequest;
 use App\Model\Item;
 use App\Model\Usuario;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         return Item::all();
     }
 
@@ -34,15 +35,19 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
-
+        $userid =  Auth()->user()->id;
+       
         $data=[ 
-        'name'=>$request->input("name"),
-        'datein'=>$request->input("datein"),
+        'usuario_id'=> $userid,
+        'name'=> $request->input("name"),
+        'datein'=> now(),
         'dateout'=>$request->input("dateout"),
-        'status'=>$request->input("status")];
+        'Status'=> true];
+        
         Item::create($data);
+
     }
 
     /**

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    public function me(){
+        
+        return Auth()->user()->id;
+    }
     public function register(Request $request)
     {
         $user = Usuario::create([
@@ -26,7 +30,7 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
+        
         return $this->respondWithToken($token);
     }
 
